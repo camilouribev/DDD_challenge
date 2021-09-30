@@ -16,9 +16,7 @@ public class Service extends Entity<ServiceId> {
     }
 
     public void addProcedure(Procedure newProcedure){
-
         this.procedureList.add(newProcedure);
-
     }
 
     public Set<Procedure> getProcedureList() {

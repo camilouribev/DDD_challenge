@@ -12,6 +12,9 @@ public class Invoice extends Entity<InvoiceId>{
         this.fee = fee;
     }
 
+    public Fee getFee() {
+        return fee;
+    }
 
     public void calculateFee(Fee fee) {
         this.fee = fee;

@@ -1,15 +1,82 @@
 package com.challenge.carworkshop.domain.car;
 
 import co.com.sofka.domain.generic.AggregateEvent;
-import com.challenge.carworkshop.domain.car.values.CarId;
+import co.com.sofka.domain.generic.DomainEvent;
+import com.challenge.carworkshop.domain.car.entities.CarOwner;
+import com.challenge.carworkshop.domain.car.entities.Insurance;
+import com.challenge.carworkshop.domain.car.entities.LicensePlate;
+import com.challenge.carworkshop.domain.car.events.*;
+import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.common.values.InsuredAmount;
-import com.challenge.carworkshop.domain.repairappointment.entities.Invoice;
-import com.challenge.carworkshop.domain.repairappointment.entities.Mechanic;
-import com.challenge.carworkshop.domain.repairappointment.entities.Service;
-import com.challenge.carworkshop.domain.repairappointment.values.AppointmentDate;
-import com.challenge.carworkshop.domain.repairappointment.values.Workshop;
+import com.challenge.carworkshop.domain.common.values.Name;
+
+
+import java.nio.charset.CoderMalfunctionError;
+import java.util.List;
+import java.util.Objects;
+
 
 public class Car extends AggregateEvent<CarId> {
+    protected CarOwner carOwner;
+    protected Insurance insurance;
+    protected LicensePlate license;
+    protected CarEngineCapacity engineCapacity;
+    protected Brand brand;
+    protected Model model;
+    protected Color color;
+
+    public Car(CarId entityId, Name carOwnerName, InsuredAmount insuredAmount, CityOfOrigin city, LicenseCode code, CarEngineCapacity engineCapacity, Brand brand, Model model, Color color) {
+        super(entityId);
+        appendChange(new CreatedCar(carOwnerName,insuredAmount,city,code,engineCapacity,brand, model,color)).apply();
+
+    }
+
+    private Car(CarId entityId){
+        super(entityId);
+        subscribe(new CarChange(this));
+
+    }
+
+    public static Car from(CarId entityId, List<DomainEvent> events){
+        var car = new Car(entityId);
+        events.forEach(car::applyEvent);
+        return car;
+    }
+
+    public void assignCarOwner(CarOwnerId ownerId, Name ownerName){
+        Objects.requireNonNull(ownerId);
+        appendChange(new AssignedCarOwner(ownerId, ownerName)).apply();
+    }
+
+    public void assignLicensePlate(LicensePlateId licenseId, CityOfOrigin city, LicenseCode code){
+        Objects.requireNonNull(licenseId);
+        appendChange(new AssignedLicensePlate(licenseId, city, code)).apply();
+    }
+
+    public void assignInsurance(InsuranceId insuranceId, InsuredAmount insuredAmount){
+        Objects.requireNonNull(insuranceId);
+        Objects.requireNonNull(insuredAmount);
+        appendChange(new AssignedInsurance(insuranceId, insuredAmount)).apply();
+    }
+
+
+    public void changeInsuranceAmount(InsuredAmount insuranceAmount){
+        Objects.requireNonNull(insuranceAmount);
+        appendChange(new ChangedInsuranceAmount(insuranceAmount)).apply();
+    }
+
+    public void changeCarOwnerName(Name name){
+        Objects.requireNonNull(name);
+        appendChange(new ChangedCarOwnerName(name)).apply();
+    }
+
+
+
+
+
+
+
+
 
 }

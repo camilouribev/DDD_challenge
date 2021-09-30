@@ -35,7 +35,7 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
                              Name mechanicName, AppointmentDate date, InsuredAmount insuredAmount,
                              CarEngineCapacity engineCapacity, Workshop workshop , AppointmentStatus appointmentStatus ) {
         super(entityId);
-        appendChange(new CreatedRepairAppointment(carId, fee, procedureList, mechanicName, date, insuredAmount, engineCapacity, workshop, appointmentStatus));
+        appendChange(new CreatedRepairAppointment(carId, fee, procedureList, mechanicName, date, insuredAmount, engineCapacity, workshop, appointmentStatus)).apply();
     }
 
     private RepairAppointment(RepairAppointmentId entityId){

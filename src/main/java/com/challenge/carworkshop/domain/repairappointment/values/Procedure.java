@@ -16,7 +16,7 @@ public class Procedure implements ValueObject<Procedure.Props> {
         if(this.type.isBlank() || this.type.length() < 3){
             throw new IllegalArgumentException("Procedure types must have at least three characters");
         }
-        if(this.price < 0)){
+        if(this.price < 0){
             throw new IllegalArgumentException("Procedure prices can't be negative");
         }
     }
