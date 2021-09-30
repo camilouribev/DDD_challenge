@@ -86,10 +86,10 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new ChangedWorkshop(workshop)).apply();
     }
 
-    public void addProcedureToService(ServiceId serviceId,Set<Procedure> procedureList){
-        Objects.requireNonNull(procedureList);
+    public void addProcedureToService(ServiceId serviceId,Procedure procedure){
+        Objects.requireNonNull(procedure);
 
-        appendChange(new AddedProcedureToService(serviceId,procedureList)).apply();
+        appendChange(new AddedProcedureToService(serviceId,procedure)).apply();
     }
 
     public void calculateInvoiceFee(InvoiceId invoiceId, Fee fee){

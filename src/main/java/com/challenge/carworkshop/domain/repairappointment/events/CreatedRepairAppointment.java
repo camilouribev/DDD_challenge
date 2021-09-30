@@ -73,4 +73,8 @@ public class CreatedRepairAppointment extends DomainEvent {
     public Workshop getWorkshop() {
         return workshop;
     }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
 }

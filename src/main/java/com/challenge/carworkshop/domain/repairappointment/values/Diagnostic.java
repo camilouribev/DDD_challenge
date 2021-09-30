@@ -10,7 +10,7 @@ public class Diagnostic implements ValueObject<String> {
 
     public Diagnostic(String diagnostic) {
         this.diagnostic = Objects.requireNonNull(diagnostic);
-        if (this.diagnostic.isBlank() || this.diagnostic.length < 3) {
+        if (this.diagnostic.isBlank() || this.diagnostic.length() < 3) {
             throw new IllegalArgumentException("Diagnostic must contain at least 3 characters");
         }
     }

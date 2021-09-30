@@ -8,20 +8,20 @@ import java.util.Set;
 
 public class AddedProcedureToService extends DomainEvent {
     private final ServiceId serviceId;
-    private final Set<Procedure> procedureList;
+    private final Procedure newProcedure;
 
 
-    public AddedProcedureToService(ServiceId serviceId, Set<Procedure> procedureList) {
+    public AddedProcedureToService(ServiceId serviceId, Procedure newProcedure) {
         super("carworkshop.domain.repairappointment.addedproceduretoservice");
         this.serviceId = serviceId;
-        this.procedureList  = procedureList;
+        this.newProcedure  = newProcedure;
     }
 
     public ServiceId getServiceId() {
         return serviceId;
     }
 
-    public Set<Procedure> getProcedureList() {
-        return procedureList;
+    public Procedure getNewProcedure() {
+        return newProcedure;
     }
 }
