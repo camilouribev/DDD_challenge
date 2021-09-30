@@ -1,4 +1,4 @@
-package com.challenge.carworkshop.domain.repairappointment;
+package com.challenge.carworkshop.domain.repairappointment.entities;
 
 import co.com.sofka.domain.generic.Entity;
 import com.challenge.carworkshop.domain.repairappointment.values.Fee;

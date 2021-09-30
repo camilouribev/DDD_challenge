@@ -1,5 +1,5 @@
 package com.challenge.carworkshop.domain.repairappointment.values;
 
-public enum Status {
+public enum AppointmentStatus {
     PENDING, IN_PROCESS, DONE;
 }
