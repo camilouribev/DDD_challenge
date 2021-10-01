@@ -6,6 +6,6 @@ public class CarOwnerId extends Identity {
     public CarOwnerId(){
 
     }
-    private CarOwnerId(String id ){ super(id);}
+    public CarOwnerId(String id ){ super(id);}
     public static CarOwnerId of(String id){ return new CarOwnerId();}
 }

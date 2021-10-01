@@ -5,10 +5,10 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class InsuredAmount implements ValueObject<Double> {
-    private final Double insuredAmount;
+public class InsuredAmount implements ValueObject<Integer> {
+    private final Integer insuredAmount;
 
-    public InsuredAmount(Double insuredAmount) {
+    public InsuredAmount(Integer insuredAmount) {
 
         this.insuredAmount = Objects.requireNonNull(insuredAmount) ;
         if(this.insuredAmount< 0){
@@ -18,7 +18,7 @@ public class InsuredAmount implements ValueObject<Double> {
     }
 
     @Override
-    public Double value() {
+    public Integer value() {
         return insuredAmount;
     }
 
@@ -27,7 +27,7 @@ public class InsuredAmount implements ValueObject<Double> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InsuredAmount that = (InsuredAmount) o;
-        return Double.compare(that.insuredAmount, insuredAmount) == 0;
+        return Objects.equals(insuredAmount, that.insuredAmount);
     }
 
     @Override

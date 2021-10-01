@@ -71,6 +71,7 @@ public class Car extends AggregateEvent<CarId> {
         appendChange(new ChangedCarOwnerName(name)).apply();
     }
 
+
     public CarOwner getCarOwner() {
         return carOwner;
     }

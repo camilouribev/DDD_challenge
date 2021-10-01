@@ -2,6 +2,7 @@ package com.challenge.carworkshop.domain.car.values;
 
 import co.com.sofka.domain.generic.ValueObject;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class LicenseCode implements ValueObject<String> {
@@ -13,10 +14,15 @@ public class LicenseCode implements ValueObject<String> {
         if (this.code.length() != 6) {
             throw new IllegalArgumentException("LicenseCode must contain at 6 characters");
         }
+
+        // Verifies license plate consists of 3 letters and 3 numbers
+        if (!this.code.toUpperCase(Locale.ROOT).matches("[A-Z]{3}\\d{3}")) {
+            throw new IllegalArgumentException("License Code must have three letters and three numbers");
+        }
     }
     @Override
     public String value() {
-        return code;
+        return code.toUpperCase(Locale.ROOT);
     }
 
     @Override

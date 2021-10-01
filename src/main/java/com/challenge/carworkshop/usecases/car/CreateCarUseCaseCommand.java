@@ -1,4 +1,4 @@
-package com.challenge.carworkshop.usecases;
+package com.challenge.carworkshop.usecases.car;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.generic.UseCaseHandler;

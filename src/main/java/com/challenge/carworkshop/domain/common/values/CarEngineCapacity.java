@@ -4,10 +4,10 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class CarEngineCapacity implements ValueObject<Double> {
-    private final double engineVolume;
+public class CarEngineCapacity implements ValueObject<Integer> {
+    private final Integer engineVolume;
 
-    public CarEngineCapacity(double engineVolume) {
+    public CarEngineCapacity(Integer engineVolume) {
         this.engineVolume = Objects.requireNonNull(engineVolume);
 
         if(engineVolume < 500 || engineVolume > 8000){
@@ -16,7 +16,7 @@ public class CarEngineCapacity implements ValueObject<Double> {
     }
 
     @Override
-    public Double value() {
+    public Integer value() {
         return null;
     }
 

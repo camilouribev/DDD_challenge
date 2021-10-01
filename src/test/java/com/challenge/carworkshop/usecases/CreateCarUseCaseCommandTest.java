@@ -8,10 +8,9 @@ import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.common.values.InsuredAmount;
 import com.challenge.carworkshop.domain.common.values.Name;
+import com.challenge.carworkshop.usecases.car.CreateCarUseCaseCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateCarUseCaseCommandTest {
 
@@ -19,7 +18,7 @@ class CreateCarUseCaseCommandTest {
     void createCarDefault(){
         var command = new CreateCar(CarId.of("xxx"),
                 new Name("Camilo","Uribe"),
-                new InsuredAmount(2000.0),
+                new InsuredAmount(2000),
                 new CityOfOrigin("Medellin"),
                 new LicenseCode("WWW999"),
                 new CarEngineCapacity(2000),
