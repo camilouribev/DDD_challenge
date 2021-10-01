@@ -26,16 +26,13 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
     protected CarEngineCapacity engineCapacity;
     protected Workshop workshop;
     protected AppointmentStatus appointmentStatus;
-    protected Set<Procedure> procedureList;
-    protected Diagnostic diagnostic;
 
 
 
-    public RepairAppointment(RepairAppointmentId entityId, CarId carId, Fee fee, Set<Procedure> procedureList,
-                             Name mechanicName, AppointmentDate date, InsuredAmount insuredAmount,
-                             CarEngineCapacity engineCapacity, Workshop workshop , AppointmentStatus appointmentStatus ) {
+
+    public RepairAppointment(RepairAppointmentId entityId, AppointmentDate date, Workshop workshop , AppointmentStatus appointmentStatus ) {
         super(entityId);
-        appendChange(new CreatedRepairAppointment(carId, fee, procedureList, mechanicName, date, insuredAmount, engineCapacity, workshop, appointmentStatus)).apply();
+        appendChange(new CreatedRepairAppointment(date, workshop, appointmentStatus)).apply();
     }
 
     private RepairAppointment(RepairAppointmentId entityId){
@@ -56,19 +53,23 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
 
     }
 
-    public void addInvoice(Fee fee){
+    public void addInvoice(RepairAppointmentId appointmentId, InvoiceId invoiceId, Fee fee){
+        Objects.requireNonNull(invoiceId);
         Objects.requireNonNull(fee);
-        appendChange(new AddedInvoiceToAppointment(fee)).apply();
+        appendChange(new AddedInvoiceToAppointment(appointmentId, invoiceId, fee)).apply();
     }
 
-    public void addService(Diagnostic diagnostic, Set<Procedure> procedureList){
-        Objects.requireNonNull(procedureList);
-        appendChange(new AddedServiceToAppointment(diagnostic, procedureList)).apply();
+    public void addService(RepairAppointmentId appointmentId, ServiceId serviceId,  Diagnostic diagnostic){
+        Objects.requireNonNull(appointmentId);
+        Objects.requireNonNull(diagnostic);
+
+        appendChange(new AddedServiceToAppointment(appointmentId,serviceId, diagnostic)).apply();
     }
 
-    public void assignMechanic(Name mechanicName){
+    public void assignMechanic(MechanicId mechanicId, Name mechanicName){
+        Objects.requireNonNull(mechanicId);
         Objects.requireNonNull(mechanicName);
-        appendChange(new AssignedMechanicToAppointment(mechanicName)).apply();
+        appendChange(new AssignedMechanicToAppointment(mechanicId,mechanicName)).apply();
     }
 
     public void changeAppointmentDate(AppointmentDate appointmentDate){

@@ -1,6 +1,7 @@
 package com.challenge.carworkshop.domain.repairappointment;
 
 import co.com.sofka.domain.generic.EventChange;
+import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.repairappointment.entities.Invoice;
 import com.challenge.carworkshop.domain.repairappointment.entities.Mechanic;
 import com.challenge.carworkshop.domain.repairappointment.entities.Service;
@@ -11,13 +12,8 @@ import java.util.HashSet;
 public class RepairAppointmentChange extends EventChange {
     public RepairAppointmentChange(RepairAppointment repairAppointment){
         apply((CreatedRepairAppointment event)->{
-            repairAppointment.carId = event.getCarId();
-            repairAppointment.invoice = event.getInvoice();
-            repairAppointment.service = event.getService();
-            repairAppointment.mechanic = event.getMechanic();
+            repairAppointment.workshop= event.getWorkshop();
             repairAppointment.date = event.getDate();
-            repairAppointment.insuredAmount = event.getInsuredAmount();
-            repairAppointment.engineCapacity = event.getEngineCapacity();
             repairAppointment.appointmentStatus = event.getAppointmentStatus();
 
         });
@@ -31,7 +27,7 @@ public class RepairAppointmentChange extends EventChange {
         });
 
         apply((AddedServiceToAppointment event)->{
-            repairAppointment.service = new Service(event.getServiceId(),event.getProcedureList());
+            repairAppointment.service = new Service(event.getServiceId(), event.getDiagnostic());
         });
 
         apply((AssignedMechanicToAppointment event)->{

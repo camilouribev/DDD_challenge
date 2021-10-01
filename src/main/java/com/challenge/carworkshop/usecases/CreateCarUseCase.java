@@ -15,6 +15,7 @@ public class CreateCarUseCase extends UseCase<TriggeredEvent<CreatedCar>, Respon
     public void executeUseCase(TriggeredEvent<CreatedCar> createdCarTriggeredEvent) {
 
         var event = createdCarTriggeredEvent.getDomainEvent();
+
         emit().onResponse(new ResponseEvents(List.of(event)));
     }
 

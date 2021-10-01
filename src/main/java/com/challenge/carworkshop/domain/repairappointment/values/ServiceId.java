@@ -6,6 +6,6 @@ public class ServiceId extends Identity {
     public ServiceId(){
 
     }
-    private ServiceId(String id ){ super(id);}
+    public ServiceId(String id){ super(id);}
     public static ServiceId of(String id){ return new ServiceId();}
 }

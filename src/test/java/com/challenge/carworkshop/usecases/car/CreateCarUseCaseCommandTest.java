@@ -1,4 +1,4 @@
-package com.challenge.carworkshop.usecases;
+package com.challenge.carworkshop.usecases.car;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
@@ -8,7 +8,6 @@ import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.common.values.InsuredAmount;
 import com.challenge.carworkshop.domain.common.values.Name;
-import com.challenge.carworkshop.usecases.car.CreateCarUseCaseCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

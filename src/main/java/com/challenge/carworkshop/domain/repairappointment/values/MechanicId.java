@@ -6,6 +6,6 @@ public class MechanicId extends Identity {
     public MechanicId(){
 
     }
-    private MechanicId(String id ){ super(id);}
+    public MechanicId(String id){ super(id);}
     public static MechanicId of(String id){ return new MechanicId();}
 }
