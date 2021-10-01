@@ -6,6 +6,6 @@ public class InsuranceId extends Identity {
     public InsuranceId(){
 
     }
-    private InsuranceId(String id ){ super(id);}
+    public InsuranceId(String id){ super(id);}
     public static InsuranceId of(String id){ return new InsuranceId();}
 }
