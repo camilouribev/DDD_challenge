@@ -4,8 +4,8 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.challenge.carworkshop.domain.car.commands.AssignInsurance;
-import com.challenge.carworkshop.domain.car.events.AssignedInsurance;
+import com.challenge.carworkshop.domain.car.commands.AssignLicensePlate;
+import com.challenge.carworkshop.domain.car.events.AssignedLicensePlate;
 import com.challenge.carworkshop.domain.car.events.CreatedCar;
 import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
@@ -20,52 +20,53 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
-class AssignInsuranceUseCaseTest {
 
+@ExtendWith(MockitoExtension.class)
+class AssignLicensePlateUseCaseTest {
     private static final String CAR_ID = "12345";
-    private static final String INSURANCE_ID = "88888888";
+    private static final String LICENSE_PLATE_ID = "333332221";
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void assignInsuranceDefault(){
+    void assignLicenseStatusDefault() {
         //Arrange
-        var command = new AssignInsurance(CarId.of(CAR_ID),new InsuranceId(INSURANCE_ID),new InsuredAmount(12000));
-        var useCase = new AssignInsuranceUseCase();
-        Mockito.when(repository.getEventsBy(INSURANCE_ID)).thenReturn(EventStored());
+        var command = new AssignLicensePlate(CarId.of(CAR_ID), new LicensePlateId(LICENSE_PLATE_ID), new CityOfOrigin("Armenia"), new LicenseCode("CCW344"));
+        var useCase = new AssignLicensePlateUseCase();
+        Mockito.when(repository.getEventsBy(LICENSE_PLATE_ID)).thenReturn(EventStored());
         useCase.addRepository(repository);
 
 
         //Act
         var events = UseCaseHandler.getInstance()
-                .setIdentifyExecutor(INSURANCE_ID)
+                .setIdentifyExecutor(LICENSE_PLATE_ID)
                 .syncExecutor(useCase, new RequestCommand<>(command))
                 .orElseThrow()
                 .getDomainEvents();
 
         //Assert
-        var insuranceAssigned = (AssignedInsurance)events.get(0);
-        Assertions.assertEquals(12000, insuranceAssigned.getInsuredAmount().value());
-        Assertions.assertEquals(INSURANCE_ID, insuranceAssigned.getInsuranceId().value());
+        var licenseAssigned = (AssignedLicensePlate) events.get(0);
+        Assertions.assertEquals("CCW344", licenseAssigned.getCode().value());
+        Assertions.assertEquals("Armenia", licenseAssigned.getCity().value());
+        Assertions.assertEquals(LICENSE_PLATE_ID, licenseAssigned.getLicensePlateId().value());
+
     }
 
     private List<DomainEvent> EventStored() {
 
         var event =  new CreatedCar(
-                new Name("Mario", "Sanchez"),
-                new InsuredAmount(12000),
-                new CityOfOrigin("Aguachica"),
-                new LicenseCode("HHY622"),
-                new CarEngineCapacity(2000),
-                new Brand("Volkswagen"),
-                new Model("Jetta"),
-                new Color("Gray")
+                new Name("Sara", "Martinez"),
+                new InsuredAmount(30000),
+                new CityOfOrigin("Armenia"),
+                new LicenseCode("CCW334"),
+                new CarEngineCapacity(1200),
+                new Brand("Suzuki"),
+                new Model("Swift"),
+                new Color("White")
 
         );
 
         return List.of(event);
     }
-
 }
