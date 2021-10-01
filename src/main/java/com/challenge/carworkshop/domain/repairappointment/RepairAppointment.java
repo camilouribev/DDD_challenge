@@ -14,7 +14,6 @@ import com.challenge.carworkshop.domain.repairappointment.values.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
     protected CarId carId;
@@ -72,9 +71,17 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new AssignedMechanicToAppointment(mechanicId,mechanicName)).apply();
     }
 
-    public void changeAppointmentDate(AppointmentDate appointmentDate){
-        Objects.requireNonNull(appointmentDate);
-        appendChange(new ChangedAppointmentDate(appointmentDate)).apply();
+    public void changeMechanicName(RepairAppointmentId appointmentId, MechanicId mechanicId, Name mechanicName){
+        Objects.requireNonNull(mechanicId);
+        Objects.requireNonNull(mechanicName);
+        appendChange(new ChangedMechanicName(appointmentId, mechanicId, mechanicName)).apply();
+    }
+
+    public void addProcedureToService(RepairAppointmentId appointmentId, ServiceId serviceId,Procedure procedure){
+        Objects.requireNonNull(appointmentId);
+        Objects.requireNonNull(procedure);
+
+        appendChange(new AddedProcedureToService(appointmentId, serviceId,procedure)).apply();
     }
 
     public void changeCarEngineCapacity(CarEngineCapacity engineCapacity){
@@ -87,11 +94,7 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new ChangedWorkshop(workshop)).apply();
     }
 
-    public void addProcedureToService(ServiceId serviceId,Procedure procedure){
-        Objects.requireNonNull(procedure);
 
-        appendChange(new AddedProcedureToService(serviceId,procedure)).apply();
-    }
 
     public void calculateInvoiceFee(InvoiceId invoiceId, Fee fee){
         Objects.requireNonNull(fee);
@@ -99,10 +102,7 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
 
     }
 
-    public void changeMechanicName(MechanicId mechanicId, Name mechanicName){
-        Objects.requireNonNull(mechanicName);
-        appendChange(new ChangedMechanicName(mechanicId, mechanicName)).apply();
-    }
+
 
 
 

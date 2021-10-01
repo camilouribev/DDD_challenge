@@ -34,9 +34,7 @@ public class RepairAppointmentChange extends EventChange {
             repairAppointment.mechanic = new Mechanic(event.getMechanicId(), event.getMechanicName());
         });
 
-        apply((ChangedAppointmentDate event)->{
-            repairAppointment.date = event.getAppointmentDate();
-        });
+
 
         apply((ChangedCarEngineCapacity event)->{
             repairAppointment.engineCapacity = event.getEngineCapacity();
