@@ -6,9 +6,9 @@ import co.com.sofka.domain.generic.ValueObject;
 import java.util.Objects;
 
 public class InsuredAmount implements ValueObject<Double> {
-    private final double insuredAmount;
+    private final Double insuredAmount;
 
-    public InsuredAmount(double insuredAmount) {
+    public InsuredAmount(Double insuredAmount) {
 
         this.insuredAmount = Objects.requireNonNull(insuredAmount) ;
         if(this.insuredAmount< 0){
