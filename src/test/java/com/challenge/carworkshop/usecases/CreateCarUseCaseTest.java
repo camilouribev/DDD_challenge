@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+
 @ExtendWith({MockitoExtension.class})
 class CreateCarUseCaseTest {
 
@@ -77,5 +78,4 @@ class CreateCarUseCaseTest {
         return List.of(event);
 
     }
-
 }

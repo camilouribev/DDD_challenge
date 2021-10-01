@@ -71,12 +71,31 @@ public class Car extends AggregateEvent<CarId> {
         appendChange(new ChangedCarOwnerName(name)).apply();
     }
 
+    public CarOwner getCarOwner() {
+        return carOwner;
+    }
 
+    public Insurance getInsurance() {
+        return insurance;
+    }
 
+    public LicensePlate getLicense() {
+        return license;
+    }
 
+    public CarEngineCapacity getEngineCapacity() {
+        return engineCapacity;
+    }
 
+    public Brand getBrand() {
+        return brand;
+    }
 
+    public Model getModel() {
+        return model;
+    }
 
-
-
+    public Color getColor() {
+        return color;
+    }
 }
