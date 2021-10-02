@@ -1,7 +1,8 @@
-package com.challenge.carworkshop.usecases;
+package com.challenge.carworkshop.usecases.car;
 
 import co.com.sofka.business.generic.UseCaseHandler;
-import co.com.sofka.business.support.TriggeredEvent;
+import co.com.sofka.business.support.RequestCommand;
+import com.challenge.carworkshop.domain.car.commands.CreateCar;
 import com.challenge.carworkshop.domain.car.events.CreatedCar;
 import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
@@ -13,39 +14,29 @@ import org.junit.jupiter.api.Test;
 class CreateCarUseCaseTest {
 
     @Test
-    void createDefaultCar(){
-        //arrange
-
-        var event = new CreatedCar(
+    void createCarDefault(){
+        var command = new CreateCar(CarId.of("xxx"),
                 new Name("Camilo","Uribe"),
                 new InsuredAmount(2000),
                 new CityOfOrigin("Medellin"),
-                new LicenseCode("ded908"),
+                new LicenseCode("WWW999"),
                 new CarEngineCapacity(2000),
                 new Brand("Toyota"),
                 new Model("Corolla"),
-                new Color("Gray")
-
-        );
-
+                new Color("yellow")
+                );
 
         var useCase = new CreateCarUseCase();
 
-
-        //act
-
-      var events= UseCaseHandler.getInstance()
-              .syncExecutor(useCase, new TriggeredEvent<>(event))
-              .orElseThrow()
-              .getDomainEvents();
-
+        var events = UseCaseHandler.getInstance().
+                syncExecutor(useCase, new RequestCommand<>(command)).
+                orElseThrow().getDomainEvents();
 
         //assert
+        var event = (CreatedCar)events.get(0);
 
-        var creationEvent = (CreatedCar)events.get(0);
-        Assertions.assertEquals("Camilo", creationEvent.getCarOwner().getName().value().name());
-        Assertions.assertEquals(2000, creationEvent.getInsurance().getInsuredAmount().value());
-        Assertions.assertEquals("DED908", creationEvent.getLicense().getLicenseCode().value());
+        Assertions.assertEquals("Camilo", event.getCarOwner().getName().value().name());
+
 
     }
 

@@ -58,11 +58,11 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new AddedInvoiceToAppointment(appointmentId, invoiceId, fee)).apply();
     }
 
-    public void addService(RepairAppointmentId appointmentId, ServiceId serviceId,  Diagnostic diagnostic){
-        Objects.requireNonNull(appointmentId);
+    public void addService(ServiceId serviceId,  Diagnostic diagnostic){
+
         Objects.requireNonNull(diagnostic);
 
-        appendChange(new AddedServiceToAppointment(appointmentId,serviceId, diagnostic)).apply();
+        appendChange(new AddedServiceToAppointment(serviceId, diagnostic)).apply();
     }
 
     public void assignMechanic(MechanicId mechanicId, Name mechanicName){
@@ -77,11 +77,10 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new ChangedMechanicName(appointmentId, mechanicId, mechanicName)).apply();
     }
 
-    public void addProcedureToService(RepairAppointmentId appointmentId, ServiceId serviceId,Procedure procedure){
-        Objects.requireNonNull(appointmentId);
+    public void addProcedureToService(ServiceId serviceId,Procedure procedure){
         Objects.requireNonNull(procedure);
 
-        appendChange(new AddedProcedureToService(appointmentId, serviceId,procedure)).apply();
+        appendChange(new AddedProcedureToService( serviceId,procedure)).apply();
     }
 
     public void changeCarEngineCapacity(CarEngineCapacity engineCapacity){
@@ -103,7 +102,73 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
     }
 
 
+    public CarId getCarId() {
+        return carId;
+    }
+
+    public void setCarId(CarId carId) {
+        this.carId = carId;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Mechanic getMechanic() {
+        return mechanic;
+    }
+
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
+    }
+
+    public AppointmentDate getDate() {
+        return date;
+    }
+
+    public void setDate(AppointmentDate date) {
+        this.date = date;
+    }
+
+    public InsuredAmount getInsuredAmount() {
+        return insuredAmount;
+    }
+
+    public void setInsuredAmount(InsuredAmount insuredAmount) {
+        this.insuredAmount = insuredAmount;
+    }
+
+    public CarEngineCapacity getEngineCapacity() {
+        return engineCapacity;
+    }
 
 
 
+    public Workshop getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(Workshop workshop) {
+        this.workshop = workshop;
+    }
+
+    public AppointmentStatus getAppointmentStatus() {
+        return appointmentStatus;
+    }
+
+    public void setAppointmentStatus(AppointmentStatus appointmentStatus) {
+        this.appointmentStatus = appointmentStatus;
+    }
 }

@@ -7,7 +7,7 @@ import co.com.sofka.business.support.ResponseEvents;
 import com.challenge.carworkshop.domain.car.Car;
 import com.challenge.carworkshop.domain.car.commands.CreateCar;
 
-public class CreateCarUseCaseCommand extends UseCase<RequestCommand<CreateCar>, ResponseEvents> {
+public class CreateCarUseCase extends UseCase<RequestCommand<CreateCar>, ResponseEvents> {
 
 
     @Override

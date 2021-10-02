@@ -11,7 +11,9 @@ public class AddServiceToAppointmentUseCase extends UseCase<RequestCommand<AddSe
     public void executeUseCase(RequestCommand<AddServiceToAppointment> addServiceToAppointmentRequestCommand) {
         var command = addServiceToAppointmentRequestCommand.getCommand();
         var repairAppointment = RepairAppointment.from(command.getAppointmentId(), retrieveEvents(command.getServiceId().value()));
-        repairAppointment.addService(command.getAppointmentId(), command.getServiceId(), command.getDiagnostic());
+
+
+        repairAppointment.addService( command.getServiceId(), command.getDiagnostic());
 
         emit().onResponse(new ResponseEvents(repairAppointment.getUncommittedChanges()));
 
