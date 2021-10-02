@@ -11,7 +11,6 @@ import com.challenge.carworkshop.domain.car.values.*;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.common.values.InsuredAmount;
 import com.challenge.carworkshop.domain.common.values.Name;
-import com.challenge.carworkshop.usecases.car.AssignCarOwnerUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
