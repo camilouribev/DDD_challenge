@@ -34,7 +34,7 @@ public class CarChange extends EventChange {
         });
 
         apply((ChangedCarOwnerName event)->{
-            car.carOwner.changeCarOwnerName(event.getCarOwnerName());
+            car.carOwner.changeCarOwnerName(event.getCarId(), event.getCarOwnerId(), event.getCarOwnerName() );
         });
 
 

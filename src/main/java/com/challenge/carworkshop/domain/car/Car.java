@@ -12,7 +12,6 @@ import com.challenge.carworkshop.domain.common.values.InsuredAmount;
 import com.challenge.carworkshop.domain.common.values.Name;
 
 
-import java.nio.charset.CoderMalfunctionError;
 import java.util.List;
 import java.util.Objects;
 
@@ -66,9 +65,9 @@ public class Car extends AggregateEvent<CarId> {
         appendChange(new ChangedInsuranceAmount(insuranceAmount)).apply();
     }
 
-    public void changeCarOwnerName(Name name){
+    public void changeCarOwnerName(CarId carId, CarOwnerId carOwnerId, Name name){
         Objects.requireNonNull(name);
-        appendChange(new ChangedCarOwnerName(name)).apply();
+        appendChange(new ChangedCarOwnerName(carId, carOwnerId, name)).apply();
     }
 
 
