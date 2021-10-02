@@ -47,12 +47,11 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         events.forEach(repairAppointment::applyEvent);
         return repairAppointment;
     }
-
-    public void assignCar(CarId carId){
-        Objects.requireNonNull(carId);
-        appendChange(new AssignedCarToAppointment(carId)).apply();
-
+    public void changeCarEngineCapacity(CarEngineCapacity engineCapacity){
+        Objects.requireNonNull(engineCapacity);
+        appendChange(new ChangedCarEngineCapacity(engineCapacity)).apply();
     }
+
 
     public void addInvoice(RepairAppointmentId appointmentId, InvoiceId invoiceId, Fee fee){
         Objects.requireNonNull(invoiceId);
@@ -85,10 +84,7 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new AddedProcedureToService( serviceId,procedure)).apply();
     }
 
-    public void changeCarEngineCapacity(CarEngineCapacity engineCapacity){
-        Objects.requireNonNull(engineCapacity);
-        appendChange(new ChangedCarEngineCapacity(engineCapacity)).apply();
-    }
+
 
     public void changeWorkshop( Workshop workshop){
         Objects.requireNonNull(workshop);
@@ -97,11 +93,6 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
 
 
 
-    public void calculateInvoiceFee(InvoiceId invoiceId, Fee fee){
-        Objects.requireNonNull(fee);
-        appendChange(new CalculatedInvoiceFee(invoiceId, fee)).apply();
-
-    }
 
 
     public CarId getCarId() {
@@ -112,37 +103,6 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         this.carId = carId;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
-    public Mechanic getMechanic() {
-        return mechanic;
-    }
-
-    public void setMechanic(Mechanic mechanic) {
-        this.mechanic = mechanic;
-    }
-
-    public AppointmentDate getDate() {
-        return date;
-    }
-
-    public void setDate(AppointmentDate date) {
-        this.date = date;
-    }
 
     public InsuredAmount getInsuredAmount() {
         return insuredAmount;

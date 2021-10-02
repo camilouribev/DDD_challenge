@@ -19,9 +19,7 @@ public class RepairAppointmentChange extends EventChange {
 
         });
 
-        apply((AssignedCarToAppointment event)->{
-            repairAppointment.carId = event.getCarId();
-        });
+
 
         apply((AddedInvoiceToAppointment event)->{
             repairAppointment.invoice = new Invoice(event.getInvoiceId(), event.getFee());
@@ -35,11 +33,11 @@ public class RepairAppointmentChange extends EventChange {
             repairAppointment.mechanic = new Mechanic(event.getMechanicId(), event.getMechanicName());
         });
 
-
-
         apply((ChangedCarEngineCapacity event)->{
             repairAppointment.engineCapacity = event.getEngineCapacity();
         });
+
+
 
         apply((ChangedWorkshop event)->{
             repairAppointment.workshop = event.getWorkshop();
@@ -49,9 +47,7 @@ public class RepairAppointmentChange extends EventChange {
            repairAppointment.service.addProcedure(event.getNewProcedure());
         });
 
-        apply((CalculatedInvoiceFee event)->{
-            repairAppointment.invoice.calculateFee(event.getFee());
-        });
+
 
         apply((ChangedMechanicName event)->{
             repairAppointment.mechanic.changeMechanicName(event.getMechanicName());

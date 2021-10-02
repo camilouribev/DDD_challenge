@@ -60,10 +60,7 @@ public class Car extends AggregateEvent<CarId> {
     }
 
 
-    public void changeInsuranceAmount(InsuredAmount insuranceAmount){
-        Objects.requireNonNull(insuranceAmount);
-        appendChange(new ChangedInsuranceAmount(insuranceAmount)).apply();
-    }
+
 
     public void changeCarOwnerName(CarId carId, CarOwnerId carOwnerId, Name name){
         Objects.requireNonNull(name);

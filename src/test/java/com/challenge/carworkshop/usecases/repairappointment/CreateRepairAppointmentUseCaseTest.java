@@ -36,8 +36,6 @@ class CreateRepairAppointmentUseCaseTest {
         Assertions.assertEquals("Barrio Prado", event.getWorkshop().value());
         Assertions.assertEquals("PENDING" , event.getAppointmentStatus().name());
 
-
-
     }
 
 }
