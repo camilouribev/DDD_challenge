@@ -15,6 +15,7 @@ public class RepairAppointmentChange extends EventChange {
             repairAppointment.workshop= event.getWorkshop();
             repairAppointment.date = event.getDate();
             repairAppointment.appointmentStatus = event.getAppointmentStatus();
+            repairAppointment.engineCapacity = event.getEngine();
 
         });
 

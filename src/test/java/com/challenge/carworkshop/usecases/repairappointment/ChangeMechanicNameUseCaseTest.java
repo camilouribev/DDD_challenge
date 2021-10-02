@@ -4,6 +4,7 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.common.values.Name;
 import com.challenge.carworkshop.domain.repairappointment.commands.ChangeMechanicName;
 import com.challenge.carworkshop.domain.repairappointment.events.AssignedMechanicToAppointment;
@@ -59,7 +60,7 @@ class ChangeMechanicNameUseCaseTest {
 
     private List<DomainEvent> EventStored() {
 
-       var  createdAppointmentEvent = new CreatedRepairAppointment(new AppointmentDate(),new Workshop("Downtown"), AppointmentStatus.PENDING);
+       var  createdAppointmentEvent = new CreatedRepairAppointment(new AppointmentDate(),new Workshop("Downtown"), AppointmentStatus.PENDING, new CarEngineCapacity(1200));
 
        var assignedMechanicEvent = new AssignedMechanicToAppointment(new MechanicId(MECHANIC_ID), new Name("Manuel", "Velez"));
 

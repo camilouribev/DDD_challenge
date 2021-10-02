@@ -4,6 +4,7 @@ import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
 import com.challenge.carworkshop.domain.repairappointment.commands.AddInvoiceToAppointment;
 import com.challenge.carworkshop.domain.repairappointment.events.AddedInvoiceToAppointment;
 import com.challenge.carworkshop.domain.repairappointment.events.CreatedRepairAppointment;
@@ -51,7 +52,8 @@ class AddInvoiceToAppointmentUseCaseTest {
         var event =  new CreatedRepairAppointment(
                 new AppointmentDate(),
                 new Workshop("Zona sur"),
-                AppointmentStatus.PENDING
+                AppointmentStatus.PENDING,
+                new CarEngineCapacity(2000)
 
         );
 

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
+
     protected CarId carId;
     protected Invoice invoice;
     protected Service service;
@@ -29,9 +30,10 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
 
 
 
-    public RepairAppointment(RepairAppointmentId entityId, AppointmentDate date, Workshop workshop , AppointmentStatus appointmentStatus ) {
+
+    public RepairAppointment(RepairAppointmentId entityId, AppointmentDate date, Workshop workshop , AppointmentStatus appointmentStatus, CarEngineCapacity engineCapacity ) {
         super(entityId);
-        appendChange(new CreatedRepairAppointment(date, workshop, appointmentStatus)).apply();
+        appendChange(new CreatedRepairAppointment(date, workshop, appointmentStatus, engineCapacity)).apply();
     }
 
     private RepairAppointment(RepairAppointmentId entityId){
@@ -88,7 +90,7 @@ public class RepairAppointment  extends AggregateEvent<RepairAppointmentId> {
         appendChange(new ChangedCarEngineCapacity(engineCapacity)).apply();
     }
 
-    public void changeWorkshop(Workshop workshop){
+    public void changeWorkshop( Workshop workshop){
         Objects.requireNonNull(workshop);
         appendChange(new ChangedWorkshop(workshop)).apply();
     }

@@ -15,7 +15,7 @@ public class CreateRepairAppointmentUseCase extends UseCase<RequestCommand<Creat
 
         RepairAppointment appointment;
 
-        appointment = new RepairAppointment(command.getEntityId(), command.getDate(),command.getWorkshop(),command.getAppointmentStatus());
+        appointment = new RepairAppointment(command.getEntityId(), command.getDate(),command.getWorkshop(),command.getAppointmentStatus(), command.getEngine());
         emit().onResponse(new ResponseEvents(appointment.getUncommittedChanges()));
 
     }

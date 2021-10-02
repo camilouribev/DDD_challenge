@@ -4,6 +4,7 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.ResponseEvents;
 import co.com.sofka.business.support.TriggeredEvent;
 import com.challenge.carworkshop.domain.repairappointment.RepairAppointment;
+import com.challenge.carworkshop.domain.repairappointment.events.AddedProcedureToService;
 import com.challenge.carworkshop.domain.repairappointment.events.CreatedRepairAppointment;
 import com.challenge.carworkshop.domain.repairappointment.values.*;
 

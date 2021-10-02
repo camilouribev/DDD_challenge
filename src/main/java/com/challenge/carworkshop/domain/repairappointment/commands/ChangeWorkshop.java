@@ -5,17 +5,13 @@ import com.challenge.carworkshop.domain.repairappointment.values.RepairAppointme
 import com.challenge.carworkshop.domain.repairappointment.values.Workshop;
 
 public class ChangeWorkshop extends Command {
-    private final RepairAppointmentId appointmentId;
+
     private final Workshop workshop;
 
-    public ChangeWorkshop(RepairAppointmentId appointmentId, Workshop workshop) {
-        this.appointmentId = appointmentId;
+    public ChangeWorkshop( Workshop workshop) {
         this.workshop = workshop;
     }
 
-    public RepairAppointmentId getAppointmentId() {
-        return appointmentId;
-    }
 
     public Workshop getWorkshop() {
         return workshop;

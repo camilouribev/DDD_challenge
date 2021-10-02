@@ -5,9 +5,7 @@ import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.TriggeredEvent;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.challenge.carworkshop.domain.common.values.CarEngineCapacity;
-import com.challenge.carworkshop.domain.repairappointment.events.AddedProcedureToService;
-import com.challenge.carworkshop.domain.repairappointment.events.AddedServiceToAppointment;
-import com.challenge.carworkshop.domain.repairappointment.events.CreatedRepairAppointment;
+import com.challenge.carworkshop.domain.repairappointment.events.*;
 import com.challenge.carworkshop.domain.repairappointment.values.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,9 +16,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class AddProcedureToServiceUseCaseTest {
+class ChangeWorkshopUseCaseTest {
     private static final String SERVICE_ID = "222";
     private final static String APPOINTMENT_ID = "98744";
 
@@ -35,7 +34,8 @@ class AddProcedureToServiceUseCaseTest {
         var event = new CreatedRepairAppointment(new AppointmentDate(),new Workshop("Downtown"), AppointmentStatus.PENDING, new CarEngineCapacity(1200));
         event.setAggregateRootId(APPOINTMENT_ID);
 
-        var useCase = new AddProcedureToServiceUseCase();
+
+        var useCase = new ChangeWorkshopUseCase();
 
         Mockito.when(repository.getEventsBy(APPOINTMENT_ID)).thenReturn(EventStored());
         useCase.addRepository(repository);
@@ -48,26 +48,27 @@ class AddProcedureToServiceUseCaseTest {
                 .getDomainEvents();
 
         //assert
-        var eventAddedService = (AddedServiceToAppointment) events.get(0);
-        var addedProcedureToService = (AddedProcedureToService) events.get(1);
+        var changedWorkshop = (ChangedWorkshop) events.get(0);
 
 
 
-        Assertions.assertEquals(SERVICE_ID, eventAddedService.getServiceId().value());
-        Assertions.assertEquals(50000.00, addedProcedureToService.getNewProcedure().value().price());
+
+        Assertions.assertEquals("Main Insurance workshop - North", changedWorkshop.getWorkshop().value());
         Mockito.verify(repository).getEventsBy("98744");
 
     }
 
     private List<DomainEvent> EventStored() {
 
-        var  createdAppointmentEvent = new CreatedRepairAppointment(new AppointmentDate(),new Workshop("Downtown"), AppointmentStatus.PENDING, new CarEngineCapacity(1200));
+        var  createdAppointmentEvent = new CreatedRepairAppointment(new AppointmentDate(),new Workshop("Downtown"), AppointmentStatus.PENDING, new CarEngineCapacity(1600));
 
-        var assignedServiceEvent = new AddedServiceToAppointment(new ServiceId(SERVICE_ID), new Diagnostic("Scratches"));
+        var changedCarEngine = new ChangedCarEngineCapacity(new CarEngineCapacity(5000));
 
-        var addedProcedureToServiceEvent = new AddedProcedureToService(new ServiceId(SERVICE_ID), new Procedure("Scratches",0.00));
+        var changedWorkshop = new ChangedWorkshop(new Workshop("Downtown"));
 
-        return List.of(createdAppointmentEvent, assignedServiceEvent,  addedProcedureToServiceEvent);
+
+        return List.of(createdAppointmentEvent,changedCarEngine, changedWorkshop);
 
     }
 }
+
